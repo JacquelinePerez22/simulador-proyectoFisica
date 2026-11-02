@@ -1,0 +1,64 @@
+[
+  {
+    "id": "concept_1",
+    "title": "Trabajo Mecánico (W)",
+    "subtitle": "Definición y Producto Escalar",
+    "formula": "W = |F| · |d| · cos(θ)",
+    "description": "El trabajo mecánico representa la transferencia de energía realizada por una fuerza aplicada sobre un cuerpo a lo largo de un desplazamiento.",
+    "keyPoints": [
+      "Si θ = 0°: Trabajo máximo positivo (la fuerza aporta energía al movimiento).",
+      "Si θ = 90°: Trabajo nulo (W = 0, la fuerza es perpendicular al desplazamiento).",
+      "Si θ = 180°: Trabajo negativo (la fuerza de rozamiento o freno le quita energía al cuerpo)."
+    ],
+    "application": "Sistemas de frenado automotriz, grúas industriales y transporte de carga."
+  },
+  {
+    "id": "concept_2",
+    "title": "Componentes de la Fuerza",
+    "subtitle": "Descomposición Vectorial",
+    "formula": "Fx = F · cos(θ)  |  Fy = F · sin(θ)",
+    "description": "Al aplicar una fuerza con un ángulo respecto a la dirección del movimiento, solo la componente horizontal (Fx) produce trabajo efectivo en esa dirección.",
+    "keyPoints": [
+      "Fx es responsable de acelerar o desplazar el objeto en el eje horizontal.",
+      "Fy afecta la fuerza normal del piso reduciendo o aumentando la fricción."
+    ],
+    "application": "Diseño de rampas de elevación, arado mecánico y tracción de trenes."
+  },
+  {
+    "id": "concept_3",
+    "title": "Leyes de Newton",
+    "subtitle": "Fundamentos de la Dinámica",
+    "formula": "∑F = m · a  |  F_accion = -F_reaccion",
+    "description": "Las leyes de Newton rigen el comportamiento de los cuerpos bajo la acción de fuerzas internas y externas.",
+    "keyPoints": [
+      "Primera Ley (Inercia): Un cuerpo permanece en reposo o MRU a menos que actúe una fuerza neta.",
+      "Segunda Ley: La aceleración es directamente proporcional a la fuerza e inversamente a la masa.",
+      "Tercera Ley: A toda acción le corresponde una reacción de igual magnitud y sentido opuesto."
+    ],
+    "application": "Cohetes espaciales, estructuras arquitectónicas y seguridad en impacto vehicular."
+  },
+  {
+    "id": "concept_4",
+    "title": "Fuerza Normal y Rozamiento",
+    "subtitle": "Fuerzas de Contacto",
+    "formula": "N = m · g  |  f_k = μ_k · N",
+    "description": "El rozamiento es una fuerza opuesta al movimiento que surge del contacto microscópico entre dos superficies.",
+    "keyPoints": [
+      "Rozamiento estático: Impide que un objeto empiece a moverse.",
+      "Rozamiento cinético (f_k): Se opone al desplazamiento continuo y disipa energía en forma de calor."
+    ],
+    "application": "Neumáticos de carreras, calzado deportivo y bandas transportadoras."
+  },
+  {
+    "id": "concept_5",
+    "title": "Teorema del Trabajo y la Energía",
+    "subtitle": "Conservación y Variación Cinética",
+    "formula": "W_neto = ΔEk = (1/2)m·Vf² - (1/2)m·Vi²",
+    "description": "El trabajo total o neto realizado sobre un cuerpo equivale al cambio producido en su energía cinética.",
+    "keyPoints": [
+      "Si W_neto > 0: Aumenta la rapidez del cuerpo.",
+      "Si W_neto < 0: El cuerpo desacelera hasta detenerse."
+    ],
+    "application": "Montañas rusas, turbinas hidroeléctricas y catapultas mecánicas."
+  }
+]
