@@ -47,3 +47,34 @@ export const getWorkInterpretation = (angleDeg, workValue) => {
     };
   }
 };
+
+// Aceleración a lo largo del desplazamiento: a = Fx / m (2.ª ley de Newton)
+export const calculateAcceleration = (force, angleDeg, mass) => {
+  if (!(mass > 0)) return 0;
+  return calculateFx(force, angleDeg) / mass;
+};
+
+/**
+ * Cinemática del cuerpo usando el teorema trabajo-energía (W = ΔEc), con
+ * aceleración constante a lo largo de d.
+ *
+ * - W > 0: el cuerpo parte del reposo y acelera hasta v = √(2W/m).
+ * - W < 0: el cuerpo entra con v0 = √(2|W|/m) y la fuerza lo frena hasta
+ *          detenerse justo al final de d.
+ * - W = 0: la fuerza no cambia la rapidez; partiendo del reposo, no se mueve.
+ *
+ * En ambos casos con movimiento, el tiempo es t = 2d / v (rapidez media v/2).
+ */
+export const calculateKinematics = (work, mass, distance) => {
+  const isValid = mass > 0 && distance > 0 && Math.abs(work) >= 0.001;
+  if (!isValid) {
+    return { mode: 'nulo', initialVelocity: 0, finalVelocity: 0, time: 0 };
+  }
+
+  const speed = Math.sqrt((2 * Math.abs(work)) / mass);
+  const time = (2 * distance) / speed;
+
+  return work > 0
+    ? { mode: 'acelera', initialVelocity: 0, finalVelocity: speed, time }
+    : { mode: 'frena', initialVelocity: speed, finalVelocity: 0, time };
+};

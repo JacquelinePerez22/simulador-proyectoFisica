@@ -6,7 +6,7 @@ import Header from '../../../src/components/Header';
 import ForceVectorChart from '../components/ForceVectorChart';
 import PhysicsAnimation from '../components/PhysicsAnimation';
 import ResultCard from '../components/ResultCard';
-import { setForce, setAngle, setDistance, selectPhysicsResults, resetValues } from '../stores/simulatorSlice';
+import { setForce, setAngle, setDistance, setMass, selectPhysicsResults, resetValues } from '../stores/simulatorSlice';
 
 export default function SimulatorScreen() {
   const theme = useTheme();
@@ -25,7 +25,7 @@ export default function SimulatorScreen() {
         <View style={isDesktopWeb ? styles.gridContainer : styles.stackContainer}>
           {/* Componente 1: Parámetros de Entrada */}
           <View style={isDesktopWeb ? styles.gridItem : styles.stackItem}>
-            <Card style={styles.cardInput} mode="elevated">
+            <Card style={[styles.cardInput, isDesktopWeb && styles.cardInputGrid]} mode="elevated">
               <Card.Content>
                 <Text variant="titleMedium" style={[styles.cardTitle, { color: theme.colors.primary }]}>
                   Parámetros de Entrada
@@ -56,6 +56,16 @@ export default function SimulatorScreen() {
                   onChangeText={(text) => dispatch(setDistance(Number(text) || 0))}
                   mode="outlined"
                   style={styles.input}
+                />
+
+                <TextInput
+                  label="Masa del cuerpo (kg)"
+                  value={String(results.mass)}
+                  keyboardType="numeric"
+                  onChangeText={(text) => dispatch(setMass(Number(text) || 0))}
+                  mode="outlined"
+                  style={styles.input}
+                  error={!(results.mass > 0)}
                 />
 
                 <Button mode="text" onPress={() => dispatch(resetValues())} style={styles.resetButton}>
@@ -89,8 +99,10 @@ export default function SimulatorScreen() {
           <View style={isDesktopWeb ? styles.gridItem : styles.stackItem}>
             <PhysicsAnimation
               distance={results.distance}
-              force={results.force}
-              work={results.work}
+              mass={results.mass}
+              angle={results.angle}
+              acceleration={results.acceleration}
+              kinematics={results.kinematics}
             />
           </View>
         </View>
@@ -130,7 +142,12 @@ const styles = StyleSheet.create({
   cardInput: {
     width: '100%',
     borderRadius: 16,
-    height: '100%', // Sincroniza la altura en la fila de la cuadrícula
+  },
+  // Solo en la cuadrícula web: iguala la altura con la tarjeta vecina de la fila.
+  // En móvil (dentro del ScrollView) height '100%' se resuelve contra la altura
+  // visible del ScrollView y estira la tarjeta, empujando las demás fuera de vista.
+  cardInputGrid: {
+    height: '100%',
   },
   cardTitle: {
     fontWeight: 'bold',
