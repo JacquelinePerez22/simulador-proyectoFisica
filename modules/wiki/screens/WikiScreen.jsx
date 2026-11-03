@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import Header from '../../../src/components/Header';
 import ProgressBar from '../components/ProgressBar';
 import WikiCard from '../components/WikiCard';
+import { useTabBarInsets } from '../../../src/hooks/useTabBarInsets';
 import { nextCard, previousCard } from '../stores/wikiSlice';
 import wikiData from '../../../data/wikiData.json';
 
 export default function WikiScreen() {
   const theme = useTheme();
   const dispatch = useDispatch();
+  const { contentBottomPadding } = useTabBarInsets();
   const currentIndex = useSelector((state) => state.wiki.currentIndex);
   const currentItem = wikiData[currentIndex];
 
@@ -23,7 +25,7 @@ export default function WikiScreen() {
         <WikiCard item={currentItem} />
       </View>
 
-      <View style={styles.navRow}>
+      <View style={[styles.navRow, { paddingBottom: contentBottomPadding }]}>
         <Button
           mode="outlined"
           icon="arrow-left"
@@ -60,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 8,
-    paddingBottom: 90, // Espacio para el navbar flotante
+    // paddingBottom se calcula con useTabBarInsets (barra flotante + área segura)
     gap: 12,
   },
   navButton: {

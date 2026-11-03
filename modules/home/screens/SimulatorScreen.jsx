@@ -6,6 +6,7 @@ import Header from '../../../src/components/Header';
 import ForceVectorChart from '../components/ForceVectorChart';
 import PhysicsAnimation from '../components/PhysicsAnimation';
 import ResultCard from '../components/ResultCard';
+import { useTabBarInsets } from '../../../src/hooks/useTabBarInsets';
 import { setForce, setAngle, setDistance, setMass, selectPhysicsResults, resetValues } from '../stores/simulatorSlice';
 
 export default function SimulatorScreen() {
@@ -13,6 +14,7 @@ export default function SimulatorScreen() {
   const dispatch = useDispatch();
   const results = useSelector(selectPhysicsResults);
   const { width } = useWindowDimensions();
+  const { contentBottomPadding } = useTabBarInsets();
 
   // Detecta si la pantalla es ancha (Web o Tablet superior a 768px)
   const isDesktopWeb = Platform.OS === 'web' && width >= 768;
@@ -21,7 +23,10 @@ export default function SimulatorScreen() {
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Header title="Simulador de Trabajo Mecánico" />
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: contentBottomPadding }]}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={isDesktopWeb ? styles.gridContainer : styles.stackContainer}>
           {/* Componente 1: Parámetros de Entrada */}
           <View style={isDesktopWeb ? styles.gridItem : styles.stackItem}>
@@ -117,7 +122,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 16,
-    paddingBottom: 110, // Margen suficiente para evitar solapamiento con la TabBar flotante
+    // paddingBottom se calcula con useTabBarInsets (barra flotante + área segura)
   },
   // Contenedor en cuadricula para Web/Escritorio (2x2)
   gridContainer: {

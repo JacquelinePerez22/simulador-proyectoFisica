@@ -3,9 +3,11 @@ import { Tabs } from 'expo-router';
 import { useTheme } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { StyleSheet, Platform } from 'react-native';
+import { TAB_BAR_HEIGHT, useTabBarInsets } from '../../src/hooks/useTabBarInsets';
 
 export default function TabsLayout() {
   const theme = useTheme();
+  const { tabBarBottom } = useTabBarInsets();
 
   return (
     <Tabs
@@ -19,6 +21,7 @@ export default function TabsLayout() {
           {
             backgroundColor: theme.colors.surface,
             borderColor: theme.colors.surfaceVariant,
+            bottom: tabBarBottom, // separa la barra de los botones de navegación del sistema
           },
         ],
       }}
@@ -56,10 +59,9 @@ export default function TabsLayout() {
 const styles = StyleSheet.create({
   floatingTabBar: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 24 : 16,
     left: 20,
     right: 20,
-    height: 72,
+    height: TAB_BAR_HEIGHT,
     borderRadius: 36,
     borderWidth: 1,
     paddingBottom: 8,
