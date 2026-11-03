@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-See `AGENTS.md` for general Expo rules (always check versioned Expo docs — this project is on **Expo SDK 55**, React Native 0.83, React 19.2; install packages with `npx expo install`). This file covers what is specific to this repo.
+See `AGENTS.md` for general Expo rules (always check versioned Expo docs — this project is on **Expo SDK 55**, React Native 0.83, React 19.2; install packages with `npx expo install`). This file covers what is specific to this repo. Full architecture with diagrams (in Spanish): `docs/ARQUITECTURA.md` — keep it updated when navigation, stores or physics change.
 
 ## Project
 
@@ -35,7 +35,7 @@ There is no test suite and no TypeScript: the codebase is plain JavaScript/JSX (
 
 ### State and physics flow
 
-`simulatorSlice` stores only raw inputs (`force` N, `angle` °, `distance` m). Derived values (`fx`, `fy`, `work`) are computed in the `selectPhysicsResults` selector via the pure functions in `src/utils/physicsCalculations.js`; `getWorkInterpretation` classifies work as nulo/positivo/negativo with a display color. Keep physics math in that utils file and derived data in selectors rather than in the store or components.
+`simulatorSlice` stores only raw inputs (`force` N, `angle` °, `distance` m, `mass` kg). Derived values (`fx`, `fy`, `work`, `acceleration`, `kinematics`) are computed in the `selectPhysicsResults` selector via the pure functions in `src/utils/physicsCalculations.js`; `getWorkInterpretation` classifies work as nulo/positivo/negativo with a display color. Keep physics math in that utils file and derived data in selectors rather than in the store or components.
 
 ### UI conventions
 
